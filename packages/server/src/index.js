@@ -23,7 +23,7 @@ const store = createStore();
 // set up any dataSources our resolvers need
 const dataSources = () => ({
   postAPI: new PostAPI(),
-  UserAPI: new UserAPI()
+  UserAPI: new UserAPI({ store })
 });
 
 // Set up Apollo Server

@@ -32,13 +32,13 @@ class UserAPI extends DataSource {
       this.context && this.context.user ? this.context.user.email : emailArg;
     if (!email || !isEmail.validate(email)) return null;
 
-    const user = new User({ email: email });
-    const result = await user.save();
-    console.log(result);
-    return result;
+    const users = await this.store.users.findOrCreate({ where: { email } });
+    return users && users[0] ? users[0] : null;
 
-    // const users = await this.store.users.findOrCreate({ where: { email } });
-    // return users && users[0] ? users[0] : null;
+    // const user = new User({ email: email });
+    // const result = await user.save();
+    // console.log(result);
+    // return result;
   }
 }
 
