@@ -18,7 +18,12 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345
+    maxWidth: 345,
+      margin: "0 auto 10px auto",
+      minWidth: "500px",
+    '&:nth-child(1)': {
+      marginTop: '100px',
+    },
   },
   media: {
     height: 0,
@@ -51,10 +56,6 @@ const PostTile = ({ post }) => {
   return (
     <Card
       className={classes.root}
-      style={{
-        margin: "0 auto 10px auto",
-        minWidth: "500px"
-      }}
     >
       <CardHeader
         avatar={
