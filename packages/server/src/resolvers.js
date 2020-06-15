@@ -3,7 +3,6 @@ const { paginateResults } = require("./utils");
 module.exports = {
   Query: {
     posts: async (_, { pageSize = 20, after }, { dataSources }) => {
-      console.log('_', _)
       const allposts = await dataSources.postAPI.getAllposts();
 
       const posts = paginateResults({
@@ -23,8 +22,16 @@ module.exports = {
           : false
       };
 
-      // console.log(result);
       return result;
+    },
+    me: async (_, __, { dataSources }) =>
+      dataSources.userAPI.findOrCreateUser(),
+  },
+  Mutation: {
+    login: async (_, { email }, { dataSources }) => {
+      const user = await dataSources.userAPI.findOrCreateUser({ email });
+      console.log(user);
+      if (user) return new Buffer(email).toString('base64');
     }
   }
 };

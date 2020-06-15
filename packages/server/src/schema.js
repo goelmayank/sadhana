@@ -12,10 +12,16 @@ const typeDefs = gql`
       """
       after: String
     ): PostConnection
+    me: User
   }
+
+  type Mutation {
+    login(email: String): String # login token
+  }
+
   """
-  Simple wrapper around our list of launches that contains a cursor to the
-  last item in the list. Pass this cursor to the launches query to fetch results
+  Simple wrapper around our list of posts that contains a cursor to thes
+  last item in the list. Pass this cursor to the posts query to fetch results
   after these.
   """
   type PostConnection {
@@ -30,6 +36,21 @@ const typeDefs = gql`
     title: String
     body: String
     image: String
+  }
+
+  type Sadhana {
+    userId: Int
+    id: Int
+    title: String
+    body: String
+    image: String
+  }
+
+  type User {
+    id: ID!
+    email: String!
+    profileImage: String
+    sadhana: [Sadhana]!
   }
 `;
 

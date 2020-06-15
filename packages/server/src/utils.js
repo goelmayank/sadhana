@@ -53,7 +53,7 @@ module.exports.createStore = () => {
     token: SQL.STRING,
   });
 
-  const trips = db.define('trip', {
+  const reports = db.define('report', {
     id: {
       type: SQL.INTEGER,
       primaryKey: true,
@@ -61,9 +61,9 @@ module.exports.createStore = () => {
     },
     createdAt: SQL.DATE,
     updatedAt: SQL.DATE,
-    launchId: SQL.INTEGER,
+    reportId: SQL.INTEGER,
     userId: SQL.INTEGER,
   });
 
-  return { users, trips };
+  return { users, reports };
 };

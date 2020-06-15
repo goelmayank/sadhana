@@ -1,17 +1,29 @@
 require("dotenv").config();
+console.log(process.env.MONGODB_URL);
 
 const { ApolloServer } = require("apollo-server");
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
+const { createStore } = require("./utils");
 
 const PostAPI = require("./datasources/post");
+const UserAPI = require("./datasources/user.js");
 
 const internalEngineDemo = require("./engine-demo");
 
+// creates a sequelize connection once. NOT for every request
+const store = createStore();
+
 // set up any dataSources our resolvers need
 const dataSources = () => ({
-  postAPI: new PostAPI()
+  postAPI: new PostAPI(),
+  UserAPI: new UserAPI()
 });
 
 // Set up Apollo Server
